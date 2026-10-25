@@ -87,26 +87,26 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            when {
-                expression {
-                    return env.BRANCH_NAME in ['v1', 'v2', 'v3']
-                }
-            }
-            steps {
-                sh '''
-                    kubectl apply -f "k8s/${VERSION}.yaml"
-
-                    kubectl set image \
-                        "deployment/telemedicine-${VERSION}" \
-                        "web=${IMAGE}"
-
-                    kubectl rollout status \
-                        "deployment/telemedicine-${VERSION}" \
-                        --timeout=180s
-                '''
-            }
+        
+stage('Deploy to Kubernetes') {
+    when {
+        expression {
+            return env.BRANCH_NAME in ['v1', 'v2', 'v3']
         }
+    }
+    steps {
+        sh '''
+            kubectl set image \
+                "deployment/telemedicine-${VERSION}" \
+                "web=${IMAGE}"
+
+            kubectl rollout status \
+                "deployment/telemedicine-${VERSION}" \
+                --timeout=180s
+        '''
+    }
+}
+
     }
 
     post {
