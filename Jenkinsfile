@@ -87,6 +87,8 @@ pipeline {
             }
         }
 
+        
+
         stage('Deploy to Kubernetes') {
             when {
                 expression {
@@ -95,8 +97,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    kubectl apply -f "k8s/${VERSION}.yaml"
-
                     kubectl set image \
                         "deployment/telemedicine-${VERSION}" \
                         "web=${IMAGE}"
@@ -107,6 +107,7 @@ pipeline {
                 '''
             }
         }
+
     }
 
     post {
