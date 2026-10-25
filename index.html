@@ -2,18 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Telemedicine v1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthLink | Clinical Portal v1</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Telemedicine System - v1</h1>
-  <h2>Book a Visit</h2>
-  <form>
-    <label>Patient name:</label>
-    <input type="text" required>
-    <label>Visit date:</label>
-    <input type="date" required>
-    <button type="submit">Schedule Visit</button>
-  </form>
-  <p>Version 1: Basic visit scheduling interface.</p>
+  <header class="topbar">
+    <div class="brand">Health<span>Link</span> Clinical Portal</div>
+    <p>Patient services · Appointment management</p>
+  </header>
+  <nav>
+    <a href="#booking">Appointments</a>
+  </nav>
+  <main>
+    <div class="eyebrow">Patient dashboard · Version 1</div>
+    <h1>Your care, connected.</h1>
+    <p class="intro">Request an appointment with your care team.</p>
+    <div class="grid">
+      <section class="card" id="booking">
+        <h2>Book a visit</h2>
+        <p class="card-description">Enter your details to request an appointment.</p>
+        <form onsubmit="event.preventDefault(); document.getElementById('booking-status').textContent='Demo: appointment form submitted.';">
+          <label for="patient">Patient name</label>
+          <input id="patient" name="patient" placeholder="Enter patient name" required>
+          <label for="visit-date">Preferred visit date</label>
+          <input id="visit-date" name="visit-date" type="date" required>
+          <label for="visit-type">Visit type</label>
+          <select id="visit-type" name="visit-type">
+            <option>General consultation</option>
+            <option>Follow-up visit</option>
+            <option>Telehealth appointment</option>
+          </select>
+          <button type="submit">Request appointment</button>
+          <p class="status" id="booking-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>HealthLink Clinical Portal · Educational demonstration · v1</footer>
 </body>
 </html>
